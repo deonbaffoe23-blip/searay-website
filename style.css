@@ -1,119 +1,163 @@
-/* basic reset*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+/* Basic Reset*/
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Space Grotesk";
 }
 
-body{
-  background: linear-gradient(135deg, #d8dd87, #dce0c4 );
-  min-height: 100vh;
+body {
+  background: #f5efe6;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: sans-serif;
 }
-
 .container{
   background-color: white;
   border-radius: 1rem;
-  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-h1{
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-h1::after{
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 3px;
-  background-color: #afbe4c;
-  border-radius: 2px;
-}
-
-#generate-btn{
-  background: linear-gradient(45deg, #787316, #9e9933);
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-}
-
-#generate-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(234, 232, 102, 0.3);
-}
-
-#generate-btn:active{
-  transform: translateY(0);
-}
-
-.palette-container{
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-}
-
-.color-box{
-  border-radius: 10px;
+  max-width: 600px;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  position: relative;
 }
 
-.color-box:hover{
-  transform: translateY(-5px);
+/*SCREENS*/
+.screen{
+  display: none;
+  padding: 2rem;
+  text-align: center;
+}
+.screen.active{
+  display: block;
 }
 
-.color{
-  height: 120px;
+/*START-SCREEN*/
+#start-screen h1{
+  color: #e86a33;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
 }
-
-.color-info{
-  background-color: white;
-  padding: 0.7rem;
+#start-screen p{
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+.quiz-header{
+  margin-bottom: 2rem;
+}
+#question-text{
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.quiz-info{
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
 }
-
-.hex-value{
-  font-weight: 500;
-  letter-spacing: 0.5px;
+.answers-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
 }
-
-.copy-btn{
+.answer-btn{
+  background-color: #f8f0e5;
+  color: #333;
+  border: 2px solid #eadbc8;
+  border-radius: 10px;
+  padding: 1rem;
   cursor: pointer;
-  color: #9ba410;
-  transition: color 0.2s;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+.answer-btn:hover{
+  background-color: #eadbc8;
+  border-color: #dac0ae;
+}
+.answer-btn.correct{
+  background-color: #e6fff0;
+  border-color: #a3f0c4;
+  color: #28a745;
+}
+.answer-btn.incorrect{
+  background-color: #fff0f0;
+  border-color: #ffbdbd;
+  color: #dc3545;
+}
+.progress-bar{
+  height: 10px;
+  background-color: #f8f0e5;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.progress{
+  height: 100%;
+  background-color: #e86a33;
+  width: 0%;
+  transition: width 0.3s ease;
 }
 
-.copy-btn:hover{
-  color: #d0ea66;
+/* RESULT SCREEN*/
+#result-screen h1{
+  color: #e86a33;
+  margin-bottom: 30px;
+}
+.result-info{
+  background-color: #f8f0e5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.result-info p{
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+#result-message{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e86a33;
+}
+button{
+  background-color: #e86a33;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover{
+  background-color: #d45b28;
 }
 
-@media(max-width: 768px){
-  .palette-container{
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+/*RESPONSIVE DESIGN*/
+@media (max-width:500px){
+  /*when I hit 500px and below, implement the style below*/
+  .screen{
+    padding: 1rem;
   }
+  #start-screen h1{
+    font-size: 2rem;
+  }
+  #question-text{
+    font-size: 1.3rem;
+  }
+  .answer-btn{
+    padding: 12px;
+  }
+  button{
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
 }
