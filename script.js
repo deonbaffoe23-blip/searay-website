@@ -1,179 +1,70 @@
-// DOM ELEMENTS
-const startScreen = document.getElementById("start-screen");
-const quizScreen = document.getElementById("quiz-screen");
-const resultScreen = document.getElementById("result-screen");
-const startButton = document.getElementById("start-btn");
-const questionText = document.getElementById("question-text");
-const answersContainer = document.getElementById("answers-container");
-const currentQuestionSpan = document.getElementById("current-question");
-const totalQuestionsSpan = document.getElementById("total-questions");
-const scoreSpan = document.getElementById("score");
-const finalScoreSpan = document.getElementById("final-score");
-const maxScoreSpan = document.getElementById("max-score");
-const resultMessage = document.getElementById("result-message");
-const restartButton = document.getElementById("restart-btn");
-const progressBar = document.getElementById("progress");
+const generateBtn = document.getElementById("generate-btn");
+const paletteContainer = document.querySelector(".palette-container");
 
-//QUIZ QUESTIONS
-const quizQuestions = [
-  {
-    question: 'what is the capital of france?',
-    answers: [
-      {text: 'London', correct: 'false'},
-      {text: 'Berlin', correct: 'false'},
-      {text: 'Paris', correct: 'true'},
-      {text: 'Madrid', correct: 'false'},
-    ],
-  },
-  {
-    question: 'which planet is known as the Red Planet?',
-    answers: [
-      {text: 'Venus', correct: 'false'},
-      {text: 'Mars', correct: 'true'},
-      {text: 'Jupiter', correct: 'false'},
-      {text: 'Saturn', correct: 'false'},
-    ],
-  },
-  {
-    question: 'what is the largest ocean on Earth?',
-    answers: [
-      {text: 'Atlantic ocean', correct: 'false'},
-      {text: 'Indian ocean', correct: 'false'},
-      {text: 'Arctic ocean', correct: 'false'},
-      {text: 'Pacific ocean', correct: 'true'},
-    ],
-  },
-  {
-    question: 'which of these is NOT a programming language?',
-    answers: [
-      {text: 'Java', correct: 'false'},
-      {text: 'Python', correct: 'false'},
-      {text: 'Banana', correct: 'true'},
-      {text: 'JavaScript', correct: 'false'},
-    ],
-  },
-  {
-    question: 'what is the chemical symbol for gold?',
-    answers: [
-      {text: 'Go', correct: 'false'},
-      {text: 'Gd', correct: 'false'},
-      {text: 'Au', correct: 'true'},
-      {text: 'Ag', correct: 'false'},
-    ],
-  },
-]
-
-//QUIZ STATE VARS
-let currentQuestionIndex = 0;
-let score = 0;
-let answersDisabled = false;
-
-totalQuestionsSpan.textContent = quizQuestions.length;
-maxScoreSpan.textContent = quizQuestions.length;
-
-// EVENT LISTENERS
-startButton.addEventListener("click", startQuiz)
-restartButton.addEventListener("click", restartQuiz)
-
-function startQuiz(){
-  //reset vars
-  currentQuestionIndex = 0;
-  score = 0;
-  scoreSpan.textContent = 0
-
-  startScreen.classList.remove("active");
-  quizScreen.classList.add("active");
-
-  showQuestion();
-}
-
-function showQuestion(){
-  //reset state
-  answersDisabled = false;
-
-  const currentQuestion = quizQuestions[currentQuestionIndex];
-
-  currentQuestionSpan.textContent = currentQuestionIndex + 1;
-
-  const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
-  progressBar.style.width = progressPercent + "%";
+generateBtn.addEventListener("click", generatePalette);
   
-  questionText.textContent = currentQuestion.question;
+paletteContainer.addEventListener("click", function (e) {
+  if(e.target.classList.contains("copy-btn"))  { 
+    const hexValue = e.target.previousElementSibling.textContent;
 
-  // todo: explain this in a second
-  answersContainer.innerHTML = "";
+    navigator.clipboard
+    .writeText(hexValue)
+    .then(()=> showCopySuccess(e.target))
+    .catch((err) => console.log(err));
+  } else if(e.target.classList.contains("color")){
+    const hexValue = e.target.nextElementSibling.querySelector(".hex-value").textContent;
+    navigator.clipboard
+    .writeText(hexValue)
+    .then(()=> showCopySuccess(e.target.nextElementSibling.querySelector(".copy-btn")))
+    .catch((err) => console.log(err));
+  }
+});
 
-  currentQuestion.answers.forEach(answer =>{
-    const button = document.createElement("button");
-    button.textContent = answer.text;
-    button.classList.add("answer-btn");
+function showCopySuccess(element) {
+  element.classList.remove("far", "fa-copy");
+  element.classList.add("fas", "fa-check");
 
-    //what is dataset? A property of the button element that allow you to store custom data
-    button.dataset.correct = answer.correct;
+  element.style.color = "#48bb78";
 
-    button.addEventListener("click", selectAnswer);
+  setTimeout(() =>{
+    element.classList.remove("fas", "fa-check");
+    element.classList.add("far", "fa-copy");
+    element.style.color = "";
+  },1500);
+}
 
-    answersContainer.appendChild(button);
+function generatePalette(){
+  const colors = []
+
+  for(let i= 0; i<15; i++){
+    colors.push(generateRandomColor())
+  }
+
+  updatePaletteDisplay(colors);
+}
+
+function generateRandomColor(){
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+
+  for(let i = 0; i<6; i++){
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+}
+
+function updatePaletteDisplay(colors){
+  const colorBoxes = document.querySelectorAll(".color-box");
+
+  colorBoxes.forEach((box,index) => {
+    const color = colors[index];
+    const colorDiv = box.querySelector(".color");
+    const hexValue = box.querySelector(".hex-value");
+
+    colorDiv.style.backgroundColor = color;
+    hexValue.textContent = color;
   });
 }
 
-function selectAnswer(event){
-  // optimization check
-  if(answersDisabled) return
-
-  answersDisabled = true
-
-  const selectedButton = event.target;
-  const isCorrect = selectedButton.dataset.correct === "true"
-
-  Array.from(answersContainer.children).forEach(button => {
-    if(button.dataset.correct === "true"){
-      button.classList.add("correct");
-    } else if(button === selectedButton){
-      button.classList.add("incorrect");
-    }
-  });
-
-  if(isCorrect){
-    score++;
-    scoreSpan.textContent = score
-  }
-
-  setTimeout(() => {
-    currentQuestionIndex++
-
-
-    if(currentQuestionIndex < quizQuestions.length){
-      showQuestion();
-    } else {
-      showResults();
-    }
-  }, 1000)
-}
-
-function showResults(){
-  quizScreen.classList.remove("active");
-  resultScreen.classList.add("active");
-
-  finalScoreSpan.textContent = score;
-
-  const percentage = (score/quizQuestions.length) * 100;
-
-  if(percentage === 100){
-    resultMessage.textContent = "Perfect! you're a genuis!"
-  } else if(percentage >= 80){
-    resultMessage.textContent = "Great job! you know your stuff"
-  } else if(percentage >= 60){
-    resultMessage.textContent = "Good effort! keep learning!"
-  } else if(percentage >= 40){
-    resultMessage.textContent = "Not bad! try again to improve!"
-  } else{
-    resultMessage.textContent = "Keep studying! you'll get better!"
-  }
-}
-
-function restartQuiz(){
-  resultScreen.classList.remove("active");
-
-  startQuiz();
-}
+generatePalette();

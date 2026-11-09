@@ -3,50 +3,218 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game</title>
+    <title>Color Palette Generator</title>
+
+    <link 
+    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="style.css">
-    <link rel="" href="script.js">
+    <link rel="script" href="script.js">
   </head>
   <body>
     <div class="container">
-      <div class="screen active" id="start-screen">
-        <h1>Quiz Time!</h1>
-        <p>Test your knowledge with these fun questions</p>
-        <button id="start-btn">Start Quiz</button>
-      </div>
+      <h1>Color Palette Generator</h1>
 
-      <div class="screen " id="quiz-screen">
-        <div class="quiz-header">
-          <h2 id="question-text">Questions</h2>
-          <div class="quiz-info">
-            <p>
-              Question <span id="current-question">1</span> of <span id="total-questions">5</span>
-            </p>
-            <p>
-              Score: <span id="score">0</span>
-            </p>
+      <button id="generate-btn">
+        <i class="fas fa-sync-alt"></i>
+        Generate Palette
+      </button>
+
+      <div class="palette-container">
+        <!--COLOR BOX 1-->
+        <div class="color-box">
+          <div class="color" style="background-color: #e1f5fe;"></div>
+          <div class="color-info">
+            <span class="hex-value">#e1f5fe</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
           </div>
         </div>
 
-        <div class="answers-container" id="answers-container">
-          <!--Answers here from js-->
+        <!--COLOR BOX 2-->
+        <div class="color-box">
+          <div class="color" style="background-color: #b3e5fc;"></div>
+          <div class="color-info">
+            <span class="hex-value">#b3e5fc</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
         </div>
 
-        <div class="progress-bar">
-          <div class="progress" id="progress"></div>
+        <!--COLOR BOX 3-->
+        <div class="color-box">
+          <div class="color" style="background-color: #81d4fa;"></div>
+          <div class="color-info">
+            <span class="hex-value">#81d4fa</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
         </div>
+
+        <!--COLOR BOX 4-->
+        <div class="color-box">
+          <div class="color" style="background-color: #4fc3f7;"></div>
+          <div class="color-info">
+            <span class="hex-value">#4fc3f7</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 5-->
+        <div class="color-box">
+          <div class="color" style="background-color: #29b6f6;"></div>
+          <div class="color-info">
+            <span class="hex-value">#29b6f6</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 6-->
+        <div class="color-box">
+          <div class="color" style="background-color: #306e8a;"></div>
+          <div class="color-info">
+            <span class="hex-value">#306e8a</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 7-->
+        <div class="color-box">
+          <div class="color" style="background-color: #93c5dc;"></div>
+          <div class="color-info">
+            <span class="hex-value">#93c5dc</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 8-->
+        <div class="color-box">
+          <div class="color" style="background-color: #264a5b;"></div>
+          <div class="color-info">
+            <span class="hex-value">#264a5b</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 9-->
+        <div class="color-box">
+          <div class="color" style="background-color: #01a9f7;"></div>
+          <div class="color-info">
+            <span class="hex-value">#01a9f7</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 10-->
+        <div class="color-box">
+          <div class="color" style="background-color: #557787;"></div>
+          <div class="color-info">
+            <span class="hex-value">#557787</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 11-->
+        <div class="color-box">
+          <div class="color" style="background-color: #003d59;"></div>
+          <div class="color-info">
+            <span class="hex-value">#003d59</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 12-->
+        <div class="color-box">
+          <div class="color" style="background-color: #003d59;"></div>
+          <div class="color-info">
+            <span class="hex-value">#003d59</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 13-->
+        <div class="color-box">
+          <div class="color" style="background-color: #003d59;"></div>
+          <div class="color-info">
+            <span class="hex-value">#003d59</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 14-->
+        <div class="color-box">
+          <div class="color" style="background-color: #003d59;"></div>
+          <div class="color-info">
+            <span class="hex-value">#003d59</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
+        <!--COLOR BOX 15-->
+        <div class="color-box">
+          <div class="color" style="background-color: #003d59;"></div>
+          <div class="color-info">
+            <span class="hex-value">#003d59</span>
+            <i class="far fa-copy copy-btn" title="copy to clipboard"></i>
+          </div>
+        </div>
+
       </div>
 
-      <div id="result-screen" class="screen ">
-        <h1>Quiz Result</h1>
-        <div class="result-info">
-          <p>You scored <span id="final-score">0</span> out of <span id="max-score">5</span> </p>
-          <div id="result-message">Good job!</div>
-        </div>
-        <button id="restart-btn">Restart Quiz</button>
-
-      </div>
     </div>
+
     <script src="script.js"></script>
   </body>
+
+    <!-- Put this right after <body> -->
+  <svg class="bg-threads" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <!-- The curvy loop path the text will follow -->
+      <path id="loop"
+          d="M -100 130 L 120 130
+            C 270 130, 270 50, 420 50
+            C 570 50, 570 130, 720 130
+            C 870 130, 870 50, 1020 50
+            C 1170 50, 1170 130, 1320 130
+            C 1420 130, 1420 310, 1320 310
+            C 1170 310, 1170 230, 1020 230
+            C 870 230, 870 310, 720 310
+            C 570 310, 570 230, 420 230
+            C 270 230, 270 310, 120 310
+            C 20 310, 20 490, 120 490
+            C 270 490, 270 410, 420 410
+            C 570 410, 570 490, 720 490
+            C 870 490, 870 410, 1020 410
+            C 1170 410, 1170 490, 1320 490
+            C 1420 490, 1420 670, 1320 670
+            C 1170 670, 1170 590, 1020 590
+            C 870 590, 870 670, 720 670
+            C 570 670, 570 590, 420 590
+            C 270 590, 270 670, 120 670
+            C 20 670, 20 850, 120 850
+            C 270 850, 270 770, 420 770
+            C 570 770, 570 850, 720 850
+            C 870 850, 870 770, 1020 770
+            C 1170 770, 1170 850, 1320 850
+            L 1540 850" />
+    </defs>
+
+    <!-- Thick ribbon behind the text -->
+    <use href="#loop" fill="none" stroke="rgba(0,0,0,0.85)"
+        stroke-width="30" stroke-linecap="round" />
+
+    <!-- Text repeated along the path -->
+    <text font-size="20" font-weight="600" letter-spacing="3" fill="#fff"
+          dominant-baseline="middle">
+      <textPath href="#loop">
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY 
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY 
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY 
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY
+        SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY SEARAY 
+      </textPath>
+    </text>
+  </svg>
 </html>
